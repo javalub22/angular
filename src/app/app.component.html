@@ -1,3 +1,3 @@
-<button type="button" (click)="toggleExists()">Toggle exists</button>
-<hr/>
-<app-my-component *ngIf="exists"></app-my-component>
+<app-my-component *ngFor="let movie of topMovies; let i = index" [director]="movie.director">
+  {{i + 1}}.{{movie.title}}
+</app-my-component>
