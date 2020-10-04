@@ -1,10 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { MyDirectiveDirective } from './my-directive.directive';
-import { MyPipePipe } from './my-pipe.pipe';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppComponent} from './app.component';
+import {MyDirectiveDirective} from './my-directive.directive';
+import {MyPipePipe} from './my-pipe.pipe';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
