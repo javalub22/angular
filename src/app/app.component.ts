@@ -1,24 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {MoviesServiceService} from './movies-service.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [MoviesServiceService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private service: MoviesServiceService;
-  topMovies: any;
-  bottomMovies: any;
+  @ViewChild('tdForm', { static: false })
+  tdForm: any;
 
-  constructor(service: MoviesServiceService) {
-    this.service = service;
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.topMovies = this.service.getTopMovies();
-    this.bottomMovies = this.service.getBottomMovies();
+
+  }
+
+  onSubmit() {
+    console.log(this.tdForm.value);
   }
 
 }

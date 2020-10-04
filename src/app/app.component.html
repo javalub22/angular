@@ -1,1 +1,11 @@
-<p appMyDirective>Style me</p>
+<form #tdForm="ngForm" (ngSubmit)="onSubmit()">
+  <fieldset ngModelGroup="userData">
+    <label>username: <input name="username" ngModel> </label>
+    <label>lastname: <input name="lastName" ngModel></label>
+  </fieldset>
+  <fieldset ngModelGroup="otherUserData">
+    <label>age: <input name="age" ngModel></label>
+    <label>country: <input name="country" ngModel></label>
+  </fieldset>
+  <button type="submit">Wyślij</button>
+</form>
