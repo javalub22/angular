@@ -30,10 +30,7 @@ export class AppComponent implements OnInit {
     this.http.get('http://jsonplaceholder.typicode.com/posts/1')
       .subscribe(
         (data: { id: number, userId: number, title: string, body: string }) => {
-          this.signupForm.controls.id.patchValue(data.id);
-          this.signupForm.controls.userId.patchValue(data.userId);
-          this.signupForm.controls.title.patchValue(data.title);
-          this.signupForm.controls.body.patchValue(data.body);
+          this.signupForm.patchValue(data);
         }
       );
   }
