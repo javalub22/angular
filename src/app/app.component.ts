@@ -1,4 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,18 +7,25 @@ import {Component, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('tdForm', { static: false })
-  tdForm: any;
+
+  modelForm: any;
 
   constructor() {
   }
 
   ngOnInit(): void {
-
+    this.modelForm = new FormGroup({
+      userData: new FormGroup({
+        firstName: new FormControl(),
+        lastName: new FormControl(),
+      }),
+      age: new FormControl(),
+      country: new FormControl()
+    });
   }
 
   onSubmit() {
-    console.log(this.tdForm.value);
+    console.log(this.modelForm.value);
   }
 
 }
