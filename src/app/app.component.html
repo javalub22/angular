@@ -1,15 +1,8 @@
-<form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
-  <div formGroupName="userData">
-    <label>username: <input name="username" formControlName="firstName"> </label>
-    <label>lastname: <input name="lastName" formControlName="lastName"></label>
-  </div>
-  <label>age: <input name="age" formControlName="age"></label>
-  <label>country: <input name="country" formControlName="country"></label>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <label>id: <input type="text" id="id" formControlName="id"/></label>
+  <label>userId: <input type="text" id="userId" formControlName="userId"/></label>
+  <label>title: <input type="text" id="title" formControlName="title"/></label>
+  <label>body: <input type="text" id="body" formControlName="body"/></label>
+  <button type="button" (click)="loadValues()">load</button>
   <button type="submit">Wyślij</button>
 </form>
-<div>
-  <div>userId: {{object.userId}}</div>
-  <div>id: {{object.id}}</div>
-  <div>title: {{object.title}}</div>
-  <div>body: {{object.body}}</div>
-</div>

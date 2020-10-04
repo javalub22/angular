@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {UserData} from './model/UserData';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,66 +8,33 @@ import {UserData} from './model/UserData';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  http: HttpClient;
-  modelForm: any;
-  object: UserData = new UserData();
+  signupForm: FormGroup;
 
-  constructor(httpClient: HttpClient) {
-    this.http = httpClient;
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.modelForm = new FormGroup({
-      userData: new FormGroup({
-        firstName: new FormControl(),
-        lastName: new FormControl(),
-      }),
-      age: new FormControl(),
-      country: new FormControl()
+    this.signupForm = new FormGroup({
+      id: new FormControl(),
+      userId: new FormControl(),
+      title: new FormControl(),
+      body: new FormControl()
     });
-    this.deleteOnServer();
   }
 
   onSubmit() {
-    console.log(this.modelForm.value);
+    console.log(this.signupForm);
   }
 
-  getFromServer() {
-    this.http.get('http://jsonplaceholder.typicode.com/posts/1').subscribe(value => {
-      this.object = value as UserData;
-      console.log(value);
-    });
+  loadValues() {
+    this.http.get('http://jsonplaceholder.typicode.com/posts/1')
+      .subscribe(
+        (data: { id: number, userId: number, title: string, body: string }) => {
+          this.signupForm.controls.id.patchValue(data.id);
+          this.signupForm.controls.userId.patchValue(data.userId);
+          this.signupForm.controls.title.patchValue(data.title);
+          this.signupForm.controls.body.patchValue(data.body);
+        }
+      );
   }
-
-  sendToServer() {
-    const httpHeader = {
-      headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'})
-    };
-    const body: UserData = {title: 'foo', body: 'bar', userId: 1} as UserData;
-    this.http.post('http://jsonplaceholder.typicode.com/posts/', body, httpHeader)
-      .subscribe(response => {
-        this.object = response as UserData;
-        console.log(response);
-      });
-  }
-
-  updateOnServer() {
-    const httpHeader = {
-      headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'})
-    };
-    const body: UserData = {title: 'foo', body: 'bar', userId: 1} as UserData;
-    this.http.put('http://jsonplaceholder.typicode.com/posts/1', body, httpHeader)
-      .subscribe(response => {
-        this.object = response as UserData;
-        console.log(response);
-      });
-  }
-
-  deleteOnServer() {
-    this.http.delete('http://jsonplaceholder.typicode.com/posts/1')
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
-
 }
